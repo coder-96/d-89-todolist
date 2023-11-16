@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap");
+* {
+    background-color: rgb(255, 255, 255);
+    font-family: "Ubuntu", sans-serif;
+}
+
+.search-add {
+    margin-top: 2rem;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.search-add a {
+    padding: 20px 80px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.todos {
+    font-size: 24px;
+    margin: 0 100px 0 200px;
+}
+
+@media (min-width: 490px) and (max-width: 992px) {
+    .todos {
+        font-size: 20px;
+        margin: 0 100px;
+    }
+}
+
+@media (min-width: 490px) and (max-width: 650px) {
+    .todos {
+        font-size: 16px;
+        margin: 0;
+    }
+}
+
+.todos ul {
+    display: grid;
+    row-gap: 1rem;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.todos > ul > li {
+    grid-column: span 3 / span 3;
+}
+
+.todos > ul > a {
+    max-width: 50px;
+}
+
+.todos > ul > a > svg {
+    background-color: wheat;
+    width: 1.8rem;
+    border-radius: 50%;
+    padding: 4px;
+}
+
+.todos > ul > a > svg:hover {
+    background-color: rgb(192, 186, 177);
+    border-radius: 50%;
+    padding: 3px;
+}
+
+@media (min-width: 0px) and (max-width: 490px) {
+    .todos {
+        font-size: 14px;
+        margin: 0px;
+    }
+}

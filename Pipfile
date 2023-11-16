@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "*"
+flask-bootstrap = "*"
+flask-ckeditor = "*"
+flask-sqlalchemy = "*"
+flask-login = "*"
+flask-gravatar = "*"
+flask-wtf = "*"
+wtforms = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
