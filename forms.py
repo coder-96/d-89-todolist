@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, URL
-from flask_ckeditor import CKEditorField
+# from flask_ckeditor import CKEditorField
 
 
 # forms
@@ -17,12 +17,6 @@ class LoginForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
     submit = SubmitField("Login")
-
-
-# class AdminPasswordForm(FlaskForm):
-#     password = PasswordField("Password", validators=[DataRequired()])
-#     confirm_password = PasswordField("Confirm Password", validators=[DataRequired()])
-#     submit = SubmitField("Change Password")
 
 
 class CreateTodoForm(FlaskForm):

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, flash, redirect, request
 from flask_bootstrap import Bootstrap
-from flask_ckeditor import CKEditor
+# from flask_ckeditor import CKEditor
 # from datetime import date
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
@@ -17,7 +17,7 @@ import os
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "8BYkEfBA6O6donzWlSihBXox7C0sKR6b"
-ckeditor = CKEditor(app)
+# ckeditor = CKEditor(app)
 Bootstrap(app)
 
 # CONNECT TO DB
@@ -39,6 +39,7 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return f'<User {self.name}>'
 
+
 class Todo(db.Model):
     __tablename__ = "todos"
     id = db.Column(db.Integer, primary_key=True)
@@ -52,17 +53,16 @@ class Todo(db.Model):
 with app.app_context():
     db.create_all()
 
-
-# Create admin-only decorator
-def admin_only(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        # If id is not 1 then return abort with 403 error
-        if current_user.id != 1:
-            return abort(403)
-        return f(*args, **kwargs)
-
-    return decorated_function
+# # Create admin-only decorator
+# def admin_only(f):
+#     @wraps(f)
+#     def decorated_function(*args, **kwargs):
+#         # If id is not 1 then return abort with 403 error
+#         if current_user.id != 1:
+#             return abort(403)
+#         return f(*args, **kwargs)
+#
+#     return decorated_function
 
 
 login_manager = LoginManager()
@@ -72,6 +72,7 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -93,6 +94,7 @@ def register():
         return redirect(url_for("home"))
     return render_template("register.html", form=form, logged_in=current_user.is_authenticated)
 
+
 @app.route('/', methods=["GET", "POST"])
 def login():
     form = LoginForm()
@@ -113,11 +115,13 @@ def login():
             return redirect(url_for('home'))
     return render_template("login.html", form=form, logged_in=current_user.is_authenticated)
 
+
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
 
 @app.route("/create", methods=["POST", "GET"])
 @login_required
@@ -144,6 +148,7 @@ def home():
     # todos = Todo.query.all()
     return render_template("home.html", all_todos=todos, logged_in=current_user.is_authenticated)
 
+
 @app.route("/update/<int:todo_id>", methods=["POST", "GET"])
 @login_required
 def update_todo(todo_id):
@@ -161,6 +166,7 @@ def update_todo(todo_id):
         return redirect(url_for("home"))
     return render_template("update_todo.html", form=form)
 
+
 @app.route("/delete/<int:todo_id>")
 @login_required
 def delete_todo(todo_id):
@@ -169,10 +175,12 @@ def delete_todo(todo_id):
     db.session.commit()
     return redirect(url_for("home"))
 
+
 @app.route('/about')
 @login_required
 def about():
     return render_template("about.html", logged_in=current_user.is_authenticated)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
